@@ -18,6 +18,6 @@ test.serial('The cnv function will parse an Ashion CNV VCF and convert to CSV', 
   t.is(result,
     `sample_id,gene,copy_number,status,attributes,chromosome,start_position,end_position,interpretation
 sample,EGFR,19.75,amplification,{"LOG2FC":"3.3038333325885","SVTYPE":"<DUP>","SVLEN":"1"},chr7,55086793,55279321,unknown
-sample,IFNA21,0.68,loss,{"LOG2FC":"-1.55448749878354","SVTYPE":"<DEL>","SVLEN":"1"},chr9,21165635,21166659,unknown
+sample,IFNA21,0.68,deletion,{"LOG2FC":"-1.55448749878354","SVTYPE":"<DEL>","SVLEN":"1"},chr9,21165635,21166659,unknown
 `);
 });

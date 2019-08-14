@@ -17,7 +17,14 @@ module.exports = async (logger, sampleId, input, output) => {
     }
 
     const interpretation = 'unknown';
-    const status = SVTYPE === '<DUP>' ? 'amplification' : 'loss';
+    let status;
+    if (SVTYPE === '<DUP>') {
+      status = 'amplification';
+    } else if (SVTYPE === '<DEL>') {
+      status = 'deletion';
+    } else {
+      throw new Error(`Unknown SVTYPE ${SVTYPE}`);
+    }
     const copyNumber = Math.round(2 * (Math.pow(2, parseFloat(LOG2FC, 10))) * 100) / 100;
     const attributes = { LOG2FC, SVTYPE, SVLEN };
 
