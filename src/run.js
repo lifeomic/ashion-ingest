@@ -13,6 +13,7 @@ const { promisify } = require('util');
 const glob = promisify(require('glob'));
 const path = require('path');
 const cnv = require('./cnv');
+const fnv = require('./fnv');
 
 const TAR_ROOT_DIR = '/tmp/contents';
 const getValue = match => (match && match.length === 1) ? match[0] : null;
@@ -33,6 +34,12 @@ module.exports = async args => {
   if (cnvFile) {
     await cnv(logger, sampleId, cnvFile, args.cnv);
     logger.info(`Processed CNV ${cnvFile}`);
+  }
+
+  const fnvFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*trn2*.vcf`));
+  if (fnvFile) {
+    await fnv(logger, sampleId, fnvFile, args.fnv);
+    logger.info(`Processed FNV ${fnvFile}`);
   }
 
   logger.info(args, `Finished`);
