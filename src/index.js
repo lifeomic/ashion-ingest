@@ -19,6 +19,46 @@ parser.addArgument(
 );
 
 parser.addArgument(
+  ['--patient'],
+  {
+    required: true,
+    help: 'The patient ID'
+  }
+);
+
+parser.addArgument(
+  ['--project'],
+  {
+    required: true,
+    help: 'The project ID'
+  }
+);
+
+parser.addArgument(
+  ['--sequence'],
+  {
+    required: true,
+    help: 'The sequence ID'
+  }
+);
+
+parser.addArgument(
+  ['--sequence-date'],
+  {
+    required: true,
+    help: 'The sequence date'
+  }
+);
+
+parser.addArgument(
+  ['--fhir'],
+  {
+    help: 'Path to output FHIR resources',
+    defaultValue: '/tmp/fhir.json'
+  }
+);
+
+parser.addArgument(
   ['--cnv'],
   {
     help: 'Path to output CNV CSV',
