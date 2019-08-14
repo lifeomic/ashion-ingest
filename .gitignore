@@ -1,0 +1,12 @@
+/work/
+.npmrc
+node_modules/
+/target/
+.nyc_output/
+deploy/terraform/run.zip
+/.vscode/
+yarn-error.log
+.idea
+advent-helix-vcf-ingest.tar.gz
+*.csv
+
