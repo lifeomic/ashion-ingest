@@ -1,0 +1,8 @@
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+.	0	.	.	.	76	PASS	id=MantaBND:160031:0:1:0:0:0:1;sv_type=TRANSLOCATION;q_score=76;break_1=6:55724312;break_2=13:108518122;break_1_annotation=BMP5:INTRON:1:-;break_2_annotation=FAM155A:EXON:1:-;nf=0.000000;tf=0.193878
+.	0	.	.	.	92	PASS	id=MantaBND:13:52679:52680:0:0:0:1;sv_type=TRANSLOCATION;q_score=92;break_1=19:51892332;break_2=22:47752373;break_1_annotation=CTD-2616J11.4:EXON:2:-;break_2_annotation=INTERGENIC;nf=0.000000;tf=0.123016
+.	0	.	.	.	237	PASS	id=MantaINV:13:32216:32217:0:0:0;sv_type=INVERSION;q_score=237;break_1=11:68671706;break_2=11:68773297;break_1_annotation=IGHMBP2:INTRON:1:+;break_2_annotation=MRGPRF:EXON:3:-;nf=0.000000;tf=0.302521
+.	0	.	.	.	67	PASS	id=MantaINV:392415:0:1:0:0:0;sv_type=INVERSION;q_score=67;break_1=19:41263283;break_2=19:41708231;break_1_annotation=SNRPA:EXON:2:+;break_2_annotation=CYP2S1:INTRON:6:+;nf=0.000000;tf=0.166667
+.	0	.	.	.	96	PASS	id=MantaDUP:TANDEM:13:52390:52391:0:0:0;sv_type=DUPLICATION;q_score=96;break_1=19:49657779;break_2=19:51484625;break_1_annotation=HRC:EXON:1:-;break_2_annotation=KLK7:INTRON:3:-;nf=0.000000;tf=0.512821
+.	0	.	.	.	163	PASS	id=MantaDUP:TANDEM:395340:0:1:0:0:0;sv_type=DUPLICATION;q_score=163;break_1=19:47861484;break_2=19:49255988;break_1_annotation=DHX34:INTRON:4:+;break_2_annotation=FUT1:EXON:3:-;nf=0.000000;tf=0.173333
+.	0	.	.	.	38	PASS	id=MantaBND:8:3392:3393:0:0:0:1;sv_type=TRANSLOCATION;q_score=38;break_1=1:120202181;break_2=17:47394531;break_1_annotation=INTERGENIC;break_2_annotation=ZNF652:EXON:2:-;nf=0.000000;tf=0.258065

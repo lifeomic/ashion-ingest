@@ -26,5 +26,13 @@ parser.addArgument(
   }
 );
 
+parser.addArgument(
+  ['--fnv'],
+  {
+    help: 'Path to output FNV CSV',
+    defaultValue: '/tmp/structural.csv'
+  }
+);
+
 const args = parser.parseArgs();
 run(args);
