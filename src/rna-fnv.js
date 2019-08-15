@@ -19,7 +19,7 @@ module.exports = async (logger, sampleId, transcriptInput, fusionInput, output) 
 
       const attributes = { junction_count, span_count, ffpm };
 
-      stream.write(`${sampleId},${formatGene(GENE)},N/A,unknown,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},unknown,somatic,N/A,${JSON.stringify(attributes)}\n`);
+      stream.write(`${sampleId},${formatGene(GENE)},N/A,fusion,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},unknown,somatic,N/A,${JSON.stringify(attributes)}\n`);
     });
   }
 
@@ -35,7 +35,7 @@ module.exports = async (logger, sampleId, transcriptInput, fusionInput, output) 
 
       const attributes = { junction_count, span_count, ffpm };
 
-      stream.write(`${sampleId},${formatGene(gene1)},${formatGene(gene2)},unknown,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},unknown,somatic,N/A,${JSON.stringify(attributes)}\n`);
+      stream.write(`${sampleId},${formatGene(gene1)},${formatGene(gene2)},fusion,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},unknown,somatic,N/A,${JSON.stringify(attributes)}\n`);
     });
   }
 
