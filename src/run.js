@@ -15,6 +15,7 @@ const path = require('path');
 const cnv = require('./cnv');
 const fnv = require('./fnv');
 const rna = require('./rna');
+const rnaFnv = require('./rna-fnv');
 const other = require('./other');
 
 const TAR_ROOT_DIR = '/tmp/contents';
@@ -48,6 +49,13 @@ module.exports = async args => {
   if (expressionFile) {
     await rna(sampleId, expressionFile, args.expression);
     logger.info(`Processed expression ${expressionFile}`);
+  }
+
+  const rnaTransciptFile = getValue(await glob(`${TAR_ROOT_DIR}/**/st.*.vcf`));
+  const rnaFusionFile = getValue(await glob(`${TAR_ROOT_DIR}/**/starFusion.*.vcf`));
+  if (rnaTransciptFile || rnaFusionFile) {
+    await rnaFnv(logger, sampleId, rnaTransciptFile, rnaFusionFile, args.rnaFnv);
+    logger.info(`Processed expression fusion files ${rnaTransciptFile}/${rnaFusionFile}`);
   }
 
   const otherFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*other*.vcf`));

@@ -1,0 +1,2 @@
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+.	0	.	.	.	.	PASS	fusion_name=METe14;junction_count=13;span_count=0;ffpm=0.123871;left_chr=chr7;left_pos=116411708;left_strand=+;left_transcript=ENST00000318493;left_region=E13;right_chr=chr7;right_pos=116414935;right_strand=+;right_transcript=ENST00000318493;right_region=E15;GENE=MET
