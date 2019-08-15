@@ -14,6 +14,7 @@ const glob = promisify(require('glob'));
 const path = require('path');
 const cnv = require('./cnv');
 const fnv = require('./fnv');
+const rna = require('./rna');
 const other = require('./other');
 
 const TAR_ROOT_DIR = '/tmp/contents';
@@ -41,6 +42,12 @@ module.exports = async args => {
   if (fnvFile) {
     await fnv(logger, sampleId, fnvFile, args.fnv);
     logger.info(`Processed FNV ${fnvFile}`);
+  }
+
+  const expressionFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.quant.genes.sf`));
+  if (expressionFile) {
+    await rna(sampleId, expressionFile, args.expression);
+    logger.info(`Processed expression ${expressionFile}`);
   }
 
   const otherFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*other*.vcf`));

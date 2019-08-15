@@ -9,5 +9,6 @@ yarn-error.log
 .idea
 advent-helix-vcf-ingest.tar.gz
 *.csv
+*.rgel
 test/unit/fhir.json
 
