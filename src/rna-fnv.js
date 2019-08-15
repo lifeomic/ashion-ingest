@@ -19,7 +19,7 @@ module.exports = async (logger, sampleId, transcriptInput, fusionInput, output) 
 
       const attributes = { junction_count, span_count, ffpm };
 
-      stream.write(`${sampleId},${formatGene(GENE)},N/A,fusion,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},unknown,somatic,N/A,${JSON.stringify(attributes)}\n`);
+      stream.write(`${sampleId},${formatGene(GENE)},N/A,fusion_transcript,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},unknown,somatic,N/A,${JSON.stringify(attributes)}\n`);
     });
   }
 
