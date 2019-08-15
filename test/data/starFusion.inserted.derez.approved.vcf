@@ -1,0 +1,3 @@
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+.	0	.	.	.	.	PASS	fusion_name=LDLRAD4--SMARCA2;junction_count=32;span_count=7;ffpm=0.412500;left_chr=chr18;left_pos=13438383;left_strand=+;left_transcript=ENST00000361205.4;left_region=E4;right_chr=chr9;right_pos=2028987;right_strand=+;right_transcript=ENST00000382203.1;right_region=E2
+.	0	.	.	.	.	PASS	fusion_name=RABEP1--NLRP1;junction_count=16;span_count=6;ffpm=0.232800;left_chr=chr17;left_pos=5185815;left_strand=+;left_transcript=ENST00000262477.6;left_region=E1;right_chr=chr17;right_pos=5445347;right_strand=-;right_transcript=ENST00000572272.1;right_region=E6

@@ -82,5 +82,13 @@ parser.addArgument(
   }
 );
 
+parser.addArgument(
+  ['--rnaFnv'],
+  {
+    help: 'Path to output expression fusions',
+    defaultValue: '/tmp/rna-fusion.csv'
+  }
+);
+
 const args = parser.parseArgs();
 run(args);
