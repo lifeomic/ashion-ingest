@@ -31,7 +31,10 @@
     "tap-xunit": "^2.4.1"
   },
   "eslintConfig": {
-    "extends": "plugin:@lifeomic/node/recommended"
+    "extends": "plugin:@lifeomic/node/recommended",
+    "rules": {
+      "security/detect-non-literal-fs-filename": "off"
+    }
   },
   "eslintIgnore": [
     "node_modules",

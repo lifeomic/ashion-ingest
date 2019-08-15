@@ -74,5 +74,13 @@ parser.addArgument(
   }
 );
 
+parser.addArgument(
+  ['--expression'],
+  {
+    help: 'Path to output expression RGEL',
+    defaultValue: '/tmp/expression.rgel'
+  }
+);
+
 const args = parser.parseArgs();
 run(args);
