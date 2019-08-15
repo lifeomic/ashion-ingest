@@ -14,6 +14,7 @@ const glob = promisify(require('glob'));
 const path = require('path');
 const cnv = require('./cnv');
 const fnv = require('./fnv');
+const other = require('./other');
 
 const TAR_ROOT_DIR = '/tmp/contents';
 const getValue = match => (match && match.length === 1) ? match[0] : null;
@@ -40,6 +41,12 @@ module.exports = async args => {
   if (fnvFile) {
     await fnv(logger, sampleId, fnvFile, args.fnv);
     logger.info(`Processed FNV ${fnvFile}`);
+  }
+
+  const otherFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*other*.vcf`));
+  if (otherFile) {
+    await other(logger, args.project, args.patient, args.sequence, args.sequenceDate, otherFile, args.fhir);
+    logger.info(`Processed other ${otherFile}`);
   }
 
   logger.info(args, `Finished`);
