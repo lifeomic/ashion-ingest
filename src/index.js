@@ -90,5 +90,31 @@ parser.addArgument(
   }
 );
 
+parser.addArgument(
+  ['--somaticVcf'],
+  {
+    help: 'Path to output somatic vcf',
+    defaultValue: '/tmp/somatic.vcf.gz'
+  }
+);
+
+parser.addArgument(
+  ['--germlineVcf'],
+  {
+    help: 'Path to output ermline vcf',
+    defaultValue: '/tmp/germline.vcf'
+  }
+);
+
+process.on('uncaughtException', function (err) {
+  console.error('Uncaught exception ', (err.stack || err.toString()));
+  process.exit(1);
+});
+
+process.on('unhandledRejection', function (reason, p) {
+  console.error('Unhandled Rejection at: Promise ', p, ' reason: ', reason);
+  process.exit(1);
+});
+
 const args = parser.parseArgs();
 run(args);
