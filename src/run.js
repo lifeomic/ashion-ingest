@@ -19,7 +19,6 @@ const rnaFnv = require('./rna-fnv');
 const other = require('./other');
 
 const TAR_ROOT_DIR = process.cwd();
-console.log(TAR_ROOT_DIR);
 const getValue = match => (match && match.length === 1) ? match[0] : null;
 
 module.exports = async args => {
