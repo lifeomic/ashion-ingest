@@ -53,6 +53,19 @@ module.exports = async args => {
   const germlineVcf = getValue(await glob(`${TAR_ROOT_DIR}/**/*.germlineFreebayes.filt.norm.RESEARCHUSEONLY.snpEff.filt.vcf`));
   if (germlineVcf) {
     childProcess.execSync(`cp -f ${germlineVcf} ${args.germlineVcf} && bgzip -f ${args.germlineVcf}`);
+    logger.info(`Copied ${germlineVcf} to ${args.germlineVcf}`);
+  }
+
+  const germlineBam = getValue(await glob(`${TAR_ROOT_DIR}/**/*C1*.aligned.bam`));
+  if (germlineBam) {
+    childProcess.execSync(`cp -f ${germlineBam} ${args.germlineBam}`);
+    logger.info(`Copied ${germlineBam} to ${args.germlineBam}`);
+  }
+
+  const somaticBam = getValue(await glob(`${TAR_ROOT_DIR}/**/*T1*.aligned.bam`));
+  if (somaticBam) {
+    childProcess.execSync(`cp -f ${somaticBam} ${args.somaticBam}`);
+    logger.info(`Copied ${somaticBam} to ${args.somaticBam}`);
   }
 
   const cnvFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*copy_number*.vcf`));
