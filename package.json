@@ -12,7 +12,7 @@
     "test": "ENV=ava ava test/unit --verbose --serial",
     "jenkins-test": "mkdir -p target && ENV=ava ava test/unit --tap --serial | tap-xunit --package unit > target/unit-test-report.xml",
     "build": "mkdir -p target/build && cp -r package.json yarn.lock src target/build/ && cd target/build && yarn install --prod",
-    "docker-build": "yarn build && docker build -t $npm_package_name . && docker tag $npm_package_name:latest lifeomic/$npm_package_name:$npm_package_version && docker save lifeomic/$npm_package_name:$npm_package_version | gzip > $npm_package_name.tar.gz"
+    "docker-build": "yarn build && docker build -t $npm_package_name . && docker tag $npm_package_name:latest lifeomic/$npm_package_name:$npm_package_version"
   },
   "dependencies": {
     "argparse": "^1.0.10",

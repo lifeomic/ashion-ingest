@@ -22,7 +22,7 @@ module.exports = async (logger, sampleId, input, output) => {
     const [chr2, pos2] = break_2.split(':');
     const attributes = { sv_type, break_1, break_1_annotation, break_2, break_2_annotation };
 
-    stream.write(`${sampleId},${formatGene(gene1)},${formatGene(gene2)},${sv_type.toLowerCase()},chr${chr1},${pos1},${pos1},chr${chr2},${pos2},${pos2},unknown,somatic,N/A,${JSON.stringify(attributes)}\n`);
+    stream.write(`${sampleId},${formatGene(gene1)},${formatGene(gene2)},${sv_type.toLowerCase()},chr${chr1},${pos1},${pos1},chr${chr2},${pos2},${pos2},unknown,somatic,N/A,"${JSON.stringify(attributes).replace(/"/g, '\'')}"\n`);
   });
 
   stream.close();

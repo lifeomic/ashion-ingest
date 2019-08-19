@@ -28,7 +28,7 @@ module.exports = async (logger, sampleId, input, output) => {
     const copyNumber = Math.round(2 * (Math.pow(2, parseFloat(LOG2FC, 10))) * 100) / 100;
     const attributes = { LOG2FC, SVTYPE, SVLEN };
 
-    stream.write(`${sampleId},${GENE},${copyNumber},${status},${JSON.stringify(attributes)},${chrom},${start},${end},${interpretation}\n`);
+    stream.write(`${sampleId},${GENE},${copyNumber},${status},"${JSON.stringify(attributes).replace(/"/g, '\'')}",${chrom},${start},${end},${interpretation}\n`);
   });
 
   stream.close();

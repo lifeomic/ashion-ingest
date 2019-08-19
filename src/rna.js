@@ -18,7 +18,7 @@ module.exports = async (sampleId, input, output) => {
     const [gene, length, effectiveLength, tpm, numReads] = line.split('\t');
     const attributes = { effectiveLength, length };
 
-    stream.write(`${sampleId},${gene},${gene},${tpm},${numReads},${JSON.stringify(attributes)},True,tpm\n`);
+    stream.write(`${sampleId},${gene},${gene},${tpm},${numReads},"${JSON.stringify(attributes).replace(/"/g, '\'')}",True,tpm\n`);
 
     cb();
   });

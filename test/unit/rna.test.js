@@ -18,7 +18,7 @@ test.serial('The rna function will parse an Ashion expression file and convert t
   console.log(result);
   t.is(result,
     `sample_id,gene_id,gene_name,expression,raw_count,attributes,is_normalized,expression_unit
-sample,BRAF,BRAF,14.9771,5140.05,{"effectiveLength":"3762.3","length":"4673.7"},True,tpm
-sample,KRAS,KRAS,5.49016,1555.22,{"effectiveLength":"3105.43","length":"4892.56"},True,tpm
+sample,BRAF,BRAF,14.9771,5140.05,"{'effectiveLength':'3762.3','length':'4673.7'}",True,tpm
+sample,KRAS,KRAS,5.49016,1555.22,"{'effectiveLength':'3105.43','length':'4892.56'}",True,tpm
 `);
 });
