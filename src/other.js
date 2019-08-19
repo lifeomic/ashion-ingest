@@ -78,7 +78,7 @@ module.exports = async (logger, project, patient, sequence, sequenceDate, input,
           },
           valueQuantity: {
             unit: 'mutations-per-megabase',
-            value: line.info.TMBVALUE
+            value: parseFloat(line.info.TMBVALUE, 10)
           }
         }],
         resourceType: 'Observation',
