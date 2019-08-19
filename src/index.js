@@ -101,8 +101,24 @@ parser.addArgument(
 parser.addArgument(
   ['--germlineVcf'],
   {
-    help: 'Path to output ermline vcf',
+    help: 'Path to output germline vcf',
     defaultValue: '/tmp/germline.vcf'
+  }
+);
+
+parser.addArgument(
+  ['--somaticBam'],
+  {
+    help: 'Path to output somatic BAM',
+    defaultValue: '/tmp/somatic.bam'
+  }
+);
+
+parser.addArgument(
+  ['--germlineBam'],
+  {
+    help: 'Path to output germline BAM',
+    defaultValue: '/tmp/germline.bam'
   }
 );
 
