@@ -68,6 +68,12 @@ module.exports = async args => {
     logger.info(`Copied ${somaticBam} to ${args.somaticBam}`);
   }
 
+  const rnaBam = getValue(await glob(`${TAR_ROOT_DIR}/**/*.std.STAR.bam`));
+  if (rnaBam) {
+    childProcess.execSync(`cp -f ${rnaBam} ${args.rnaBam}`);
+    logger.info(`Copied ${rnaBam} to ${args.rnaBam}`);
+  }
+
   const cnvFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*copy_number*.vcf`));
   if (cnvFile) {
     await cnv(logger, somaticSample, cnvFile, args.cnv);
@@ -86,10 +92,10 @@ module.exports = async args => {
     logger.info(`Processed expression ${expressionFile}`);
   }
 
-  const rnaTransciptFile = getValue(await glob(`${TAR_ROOT_DIR}/**/st.*.vcf`));
-  const rnaFusionFile = getValue(await glob(`${TAR_ROOT_DIR}/**/starFusion.*.vcf`));
+  const rnaTransciptFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.st.*.vcf`));
+  const rnaFusionFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.starFusion.*.vcf`));
   if (rnaTransciptFile || rnaFusionFile) {
-    await rnaFnv(logger, somaticSample, rnaTransciptFile, rnaFusionFile, args.rnaFnv);
+    await rnaFnv(logger, somaticSample, rnaTransciptFile, rnaFusionFile, args.fnv);
     logger.info(`Processed expression fusion files ${rnaTransciptFile}/${rnaFusionFile}`);
   }
 
