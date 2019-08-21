@@ -43,6 +43,14 @@ parser.addArgument(
 );
 
 parser.addArgument(
+  ['--testId'],
+  {
+    required: true,
+    help: 'The test ID'
+  }
+);
+
+parser.addArgument(
   ['--sequence-date'],
   {
     required: true,
