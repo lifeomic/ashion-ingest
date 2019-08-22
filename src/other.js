@@ -24,7 +24,7 @@ const MSI_CODES = {
   }
 };
 
-module.exports = async (logger, project, patient, sequence, sequenceDate, input, output) => {
+module.exports = async (logger, project, patient, sequence, sequenceDate, testId, input, output) => {
   await reader(input, line => {
     if (line.info.TMBVALUE && line.info.TMBCATEGORY) {
       const obs = {
@@ -43,6 +43,9 @@ module.exports = async (logger, project, patient, sequence, sequenceDate, input,
             }, {
               code: 'Ashion',
               system: 'http://lifeomic.com/fhir/report-source'
+            }, {
+              code: testId,
+              system: 'http://lifeomic.com/fhir/sequence-test-id'
             }
           ]
         },
@@ -113,6 +116,9 @@ module.exports = async (logger, project, patient, sequence, sequenceDate, input,
           }, {
             code: 'Ashion',
             system: 'http://lifeomic.com/fhir/report-source'
+          }, {
+            code: testId,
+            system: 'http://lifeomic.com/fhir/sequence-test-id'
           }]
         },
         status: 'final',

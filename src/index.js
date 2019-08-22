@@ -43,6 +43,14 @@ parser.addArgument(
 );
 
 parser.addArgument(
+  ['--testId'],
+  {
+    required: true,
+    help: 'The test ID'
+  }
+);
+
+parser.addArgument(
   ['--sequence-date'],
   {
     required: true,
@@ -83,14 +91,6 @@ parser.addArgument(
 );
 
 parser.addArgument(
-  ['--rnaFnv'],
-  {
-    help: 'Path to output expression fusions',
-    defaultValue: '/tmp/rna-fusion.csv'
-  }
-);
-
-parser.addArgument(
   ['--somaticVcf'],
   {
     help: 'Path to output somatic vcf',
@@ -119,6 +119,14 @@ parser.addArgument(
   {
     help: 'Path to output germline BAM',
     defaultValue: '/tmp/germline.bam'
+  }
+);
+
+parser.addArgument(
+  ['--rnaBam'],
+  {
+    help: 'Path to output rna BAM',
+    defaultValue: '/tmp/rna.bam'
   }
 );
 
