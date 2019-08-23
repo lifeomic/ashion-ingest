@@ -12,7 +12,7 @@ test.beforeEach(async t => {
 });
 
 test.serial('The fnv function will parse an Ashion FNV VCF and convert to CSV', async t => {
-  await fnv(console, 'sample', path.resolve(__dirname, '../data/trn2.reportable.vcf'), path.join(__dirname, 'fnv.csv'));
+  await fnv(console, 'sample', path.resolve(__dirname, '../data/trn2.reportable.vcf'), path.resolve(__dirname, '../data/st.inserted.derez.approved.vcf'), path.resolve(__dirname, '../data/starFusion.inserted.derez.approved.vcf'), path.join(__dirname, 'fnv.csv'));
 
   const result = fs.readFileSync(path.join(__dirname, 'fnv.csv'), 'utf8');
   t.is(result,
@@ -24,5 +24,8 @@ sample,SNRPA,CYP2S1,inversion,chr19,41263283,41263283,chr19,41708231,41708231,un
 sample,HRC,KLK7,duplication,chr19,49657779,49657779,chr19,51484625,51484625,unknown,somatic,N/A,"{'sv_type':'DUPLICATION','break_1':'19:49657779','break_1_annotation':'HRC:EXON:1:-','break_2':'19:51484625','break_2_annotation':'KLK7:INTRON:3:-'}"
 sample,DHX34,FUT1,duplication,chr19,47861484,47861484,chr19,49255988,49255988,unknown,somatic,N/A,"{'sv_type':'DUPLICATION','break_1':'19:47861484','break_1_annotation':'DHX34:INTRON:4:+','break_2':'19:49255988','break_2_annotation':'FUT1:EXON:3:-'}"
 sample,N/A,ZNF652,translocation,chr1,120202181,120202181,chr17,47394531,47394531,unknown,somatic,N/A,"{'sv_type':'TRANSLOCATION','break_1':'1:120202181','break_1_annotation':'INTERGENIC','break_2':'17:47394531','break_2_annotation':'ZNF652:EXON:2:-'}"
+sample,MET,N/A,rna_fusion_transcript,chr7,116411708,116411708,chr7,116414935,116414935,unknown,somatic,N/A,"{'junction_count':'13','span_count':'0','ffpm':'0.123871'}"
+sample,LDLRAD4,SMARCA2,rna_fusion,chr18,13438383,13438383,chr9,2028987,2028987,unknown,somatic,N/A,"{'junction_count':'32','span_count':'7','ffpm':'0.412500'}"
+sample,RABEP1,NLRP1,rna_fusion,chr17,5185815,5185815,chr17,5445347,5445347,unknown,somatic,N/A,"{'junction_count':'16','span_count':'6','ffpm':'0.232800'}"
 `);
 });
