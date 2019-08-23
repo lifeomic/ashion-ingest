@@ -25,6 +25,8 @@ const MSI_CODES = {
 };
 
 module.exports = async (logger, project, patient, sequence, sequenceDate, testId, input, output) => {
+  const stream = fs.createWriteStream(output, { flags: 'a+' });
+
   await reader(input, line => {
     if (line.info.TMBVALUE && line.info.TMBCATEGORY) {
       const obs = {
@@ -96,7 +98,7 @@ module.exports = async (logger, project, patient, sequence, sequenceDate, testId
           url: 'http://hl7.org/fhir/StructureDefinition/observation-geneticsSequence'
         }]
       };
-      fs.appendFileSync(output, `${JSON.stringify(obs)}\n`);
+      stream.write(`${JSON.stringify(obs)}\n`);
       logger.info(obs, 'Saved TMB observation');
     } else if (line.info.MSICATEGORY) {
       const obs = {
@@ -145,10 +147,12 @@ module.exports = async (logger, project, patient, sequence, sequenceDate, testId
           }]
         }
       };
-      fs.appendFileSync(output, `${JSON.stringify(obs)}\n`);
+      stream.write(`${JSON.stringify(obs)}\n`);
       logger.info(obs, 'Saved MSI observation');
     } else {
       logger.info(line, `Unknown line type`);
     }
   });
+
+  stream.close();
 };

@@ -15,7 +15,6 @@ const childProcess = require('child_process');
 const cnv = require('./cnv');
 const fnv = require('./fnv');
 const rna = require('./rna');
-const rnaFnv = require('./rna-fnv');
 const other = require('./other');
 
 const TAR_ROOT_DIR = process.cwd();
@@ -80,12 +79,6 @@ module.exports = async args => {
     logger.info(`Processed CNV ${cnvFile}`);
   }
 
-  const fnvFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*trn2*.vcf`));
-  if (fnvFile) {
-    await fnv(logger, somaticSample, fnvFile, args.fnv);
-    logger.info(`Processed FNV ${fnvFile}`);
-  }
-
   const expressionFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.quant.genes.sf`));
   if (expressionFile) {
     await rna(somaticSample, expressionFile, args.expression);
@@ -94,14 +87,15 @@ module.exports = async args => {
 
   const rnaTransciptFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.st.*.vcf`));
   const rnaFusionFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.starFusion.*.vcf`));
-  if (rnaTransciptFile || rnaFusionFile) {
-    await rnaFnv(logger, somaticSample, rnaTransciptFile, rnaFusionFile, args.fnv);
-    logger.info(`Processed expression fusion files ${rnaTransciptFile}/${rnaFusionFile}`);
+  const fnvFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*trn2*.vcf`));
+  if (fnvFile || rnaTransciptFile || rnaFusionFile) {
+    await fnv(logger, somaticSample, fnvFile, rnaTransciptFile, rnaFusionFile, args.fnv);
+    logger.info(`Processed expression fusion files ${fnvFile}/${rnaTransciptFile}/${rnaFusionFile}`);
   }
 
   const otherFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*other*.vcf`));
   if (otherFile) {
-    await other(logger, args.project, args.patient, args.sequence, args.sequenceDate, otherFile, args.fhir);
+    await other(logger, args.project, args.patient, args.sequence, args.sequenceDate, args.testId, otherFile, args.fhir);
     logger.info(`Processed other ${otherFile}`);
   }
 
