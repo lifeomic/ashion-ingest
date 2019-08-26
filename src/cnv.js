@@ -21,7 +21,7 @@ module.exports = async (logger, sampleId, input, output) => {
     if (SVTYPE === '<DUP>') {
       status = 'amplification';
     } else if (SVTYPE === '<DEL>') {
-      status = 'deletion';
+      status = 'loss';
     } else {
       throw new Error(`Unknown SVTYPE ${SVTYPE}`);
     }
