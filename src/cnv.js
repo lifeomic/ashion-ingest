@@ -16,7 +16,7 @@ module.exports = async (logger, sampleId, input, output) => {
       throw new Error('Missing required copy number fields');
     }
 
-    const interpretation = 'unknown';
+    const interpretation = 'N/A';
     let status;
     if (SVTYPE === '<DUP>') {
       status = 'amplification';
