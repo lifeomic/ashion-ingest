@@ -23,7 +23,7 @@ module.exports = async (logger, sampleId, fnvFile, transcriptInput, fusionInput,
       const [chr2, pos2] = break_2.split(':');
       const attributes = { sv_type, break_1, break_1_annotation, break_2, break_2_annotation };
 
-      stream.write(`${sampleId},${formatGene(gene1)},${formatGene(gene2)},${sv_type.toLowerCase()},chr${chr1},${pos1},${pos1},chr${chr2},${pos2},${pos2},,somatic,N/A,"${JSON.stringify(attributes).replace(/"/g, '\'')}"\n`);
+      stream.write(`${sampleId},${formatGene(gene1)},${formatGene(gene2)},${sv_type.toLowerCase()},chr${chr1},${pos1},${pos1},chr${chr2},${pos2},${pos2},N/A,somatic,N/A,"${JSON.stringify(attributes).replace(/"/g, '\'')}"\n`);
     });
   }
 
@@ -37,7 +37,7 @@ module.exports = async (logger, sampleId, fnvFile, transcriptInput, fusionInput,
 
       const attributes = { junction_count, span_count, ffpm };
 
-      stream.write(`${sampleId},${formatGene(GENE)},N/A,rna_fusion_transcript,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},,somatic,N/A,"${JSON.stringify(attributes).replace(/"/g, '\'')}"\n`);
+      stream.write(`${sampleId},${formatGene(GENE)},N/A,rna_fusion_transcript,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},N/A,somatic,N/A,"${JSON.stringify(attributes).replace(/"/g, '\'')}"\n`);
     });
   }
 
@@ -53,7 +53,7 @@ module.exports = async (logger, sampleId, fnvFile, transcriptInput, fusionInput,
 
       const attributes = { junction_count, span_count, ffpm };
 
-      stream.write(`${sampleId},${formatGene(gene1)},${formatGene(gene2)},rna_fusion,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},,somatic,N/A,"${JSON.stringify(attributes).replace(/"/g, '\'')}"\n`);
+      stream.write(`${sampleId},${formatGene(gene1)},${formatGene(gene2)},rna_fusion,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},N/A,somatic,N/A,"${JSON.stringify(attributes).replace(/"/g, '\'')}"\n`);
     });
   }
 
