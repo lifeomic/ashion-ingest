@@ -15,8 +15,8 @@ const MSI_CODES = {
     code: 'LA14122-8'
   },
   high: {
-    display: 'Unstable',
-    code: 'LA14123-6'
+    display: 'MSI-H',
+    code: 'LA26203-2'
   },
   indeterminate: {
     display: 'Indeterminate',
