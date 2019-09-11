@@ -11,7 +11,7 @@ test.beforeEach(async t => {
   } catch (ignored) {}
 });
 
-test.serial('The fnv function will parse an Ashion FNV VCF and convert to CSV', async t => {
+test.serial('The other function will parse an Ashion other VCF and create TMB/MSI observations', async t => {
   await other(console, 'project', 'patient', 'sequence', '2000-01-01', 'test-1', path.resolve(__dirname, '../data/other.vcf'), path.join(__dirname, 'fhir.json'));
 
   const result = fs.readFileSync(path.join(__dirname, 'fhir.json'), 'utf8');
