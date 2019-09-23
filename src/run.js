@@ -99,5 +99,11 @@ module.exports = async args => {
     logger.info(`Processed other ${otherFile}`);
   }
 
+  const pdfFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.pdf`));
+  if (pdfFile) {
+    childProcess.execSync(`cp -f ${pdfFile} ${args.reportFile}`);
+    logger.info(`Coipied ${pdfFile} to ${args.reportFile}`);
+  }
+
   logger.info(args, `Finished`);
 };
