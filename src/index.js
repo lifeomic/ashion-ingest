@@ -130,6 +130,14 @@ parser.addArgument(
   }
 );
 
+parser.addArgument(
+  ['--reportFile'],
+  {
+    help: 'The report file path',
+    defaultValue: '/tmp/report.pdf'
+  }
+);
+
 process.on('uncaughtException', function (err) {
   console.error('Uncaught exception ', (err.stack || err.toString()));
   process.exit(1);
