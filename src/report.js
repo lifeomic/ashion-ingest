@@ -29,14 +29,11 @@ module.exports = async (logger, project, patient, fileUrl, sequenceDate, output)
     'subject': {
       'reference': `Patient/${patient}`
     },
-    'result': [],
-    'report': {
-      'presentedForm': [{
-        'url': fileUrl,
-        'contentType': 'application/pdf',
-        'title': 'Ashion GEM ExTra'
-      }]
-    }
+    'presentedForm': [{
+      'url': fileUrl,
+      'contentType': 'application/pdf',
+      'title': 'Ashion GEM ExTra'
+    }]
   };
 
   stream.write(`${JSON.stringify(report)}\n`);
