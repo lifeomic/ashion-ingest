@@ -16,6 +16,7 @@ const cnv = require('./cnv');
 const fnv = require('./fnv');
 const rna = require('./rna');
 const other = require('./other');
+const report = require('./report');
 
 const TAR_ROOT_DIR = process.cwd();
 const getValue = match => (match && match.length === 1) ? match[0] : null;
@@ -99,10 +100,14 @@ module.exports = async args => {
     logger.info(`Processed other ${otherFile}`);
   }
 
-  const pdfFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.pdf`));
+  const pdfFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.pdf`)) || getValue(await glob(`${TAR_ROOT_DIR}/*.pdf`));
   if (pdfFile) {
     childProcess.execSync(`cp -f '${pdfFile}' '${args.reportFile}'`);
     logger.info(`Coipied ${pdfFile} to ${args.reportFile}`);
+
+    if (args.reportUrl) {
+      await report(logger, args.project, args.patient, args.reportUrl, args.sequenceDate, args.fhir);
+    }
   }
 
   logger.info(args, `Finished`);

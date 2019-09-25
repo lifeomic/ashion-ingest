@@ -11,4 +11,5 @@ advent-helix-vcf-ingest.tar.gz
 *.csv
 *.rgel
 test/unit/fhir.json
+test/unit/report.json
 

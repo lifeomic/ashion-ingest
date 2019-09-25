@@ -138,6 +138,13 @@ parser.addArgument(
   }
 );
 
+parser.addArgument(
+  ['--reportUrl'],
+  {
+    help: 'The report file URL'
+  }
+);
+
 process.on('uncaughtException', function (err) {
   console.error('Uncaught exception ', (err.stack || err.toString()));
   process.exit(1);
