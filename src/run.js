@@ -39,10 +39,10 @@ module.exports = async args => {
 
   const result = childProcess.execSync(`bcftools query -l ${somaticVcf}`);
   const samples = result.toString().split('\n');
-  const somaticSample = samples.find(s => s.includes('T1'));
-  const germlineSample = samples.find(s => s.includes('C1'));
+  const somaticSample = samples.find(s => s.includes('Whole_T'));
+  const germlineSample = samples.find(s => s.includes('Whole_C'));
   if (!somaticSample || !germlineSample) {
-    throw new Error(samples, 'Could not determine samples from somatic vcf');
+    throw new Error(`Could not determine samples from somatic vcf: ${samples}`);
   }
 
   logger.info(`Processing with somatic sample ${somaticSample} and germline ${germlineSample}`);
