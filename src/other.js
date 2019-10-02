@@ -155,4 +155,9 @@ module.exports = async (logger, project, patient, sequence, sequenceDate, testId
   });
 
   stream.close();
+
+  return new Promise((resolve, reject) => {
+    stream.on('error', reject);
+    stream.on('finish', resolve);
+  });
 };
