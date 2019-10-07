@@ -5,7 +5,7 @@ const reader = require('./vcf-reader');
 
 const TMB_CODES = {
   high: 'TMB-H',
-  indeterminate: 'TMB-I',
+  intermediate: 'TMB-I',
   low: 'TMB-L'
 };
 
