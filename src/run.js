@@ -26,7 +26,13 @@ module.exports = async args => {
 
   await tar.x({
     file: args.input,
-    cwd: TAR_ROOT_DIR
+    cwd: TAR_ROOT_DIR,
+    filter: path => {
+      return path.endsWith('.vcf') ||
+        path.endsWith('.bam') ||
+        path.endsWith('.sf') ||
+        path.endsWith('.pdf');
+    }
   });
 
   logger.info(`Tar extraction completed`);
