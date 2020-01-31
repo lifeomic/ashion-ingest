@@ -54,7 +54,7 @@ module.exports = async args => {
   logger.info(`Processing with somatic sample ${somaticSample} and germline ${germlineSample}`);
 
   // pull out somatic sample with just hom / het variants
-  childProcess.execSync(`bcftools view -s ${somaticSample} -i 'GT="hom" | GT="het"' ${somaticVcf} | bgzip -f -c > ${args.somaticVcf}`);
+  childProcess.execSync(`bcftools view -s ${somaticSample} -i 'GT!="0/0"' ${somaticVcf} | bgzip -f -c > ${args.somaticVcf}`);
 
   const germlineVcf = getValue(await glob(`${TAR_ROOT_DIR}/**/*.germlineFreebayes.filt.norm.RESEARCHUSEONLY.snpEff.filt.vcf`));
   if (germlineVcf) {
