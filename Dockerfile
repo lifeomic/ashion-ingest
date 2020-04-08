@@ -22,9 +22,9 @@ COPY target/build/ /opt/app/
 # -> /usr/local/bin/tabix
 RUN set -ex \
   && cd /opt \
-  && git clone --depth 1 --branch 1.8 https://github.com/samtools/htslib \
-  && git clone --depth 1 --branch 1.8 https://github.com/samtools/samtools \
-  && git clone --depth 1 --branch 1.8 https://github.com/samtools/bcftools \
+  && git clone --depth 1 --branch 1.9 https://github.com/samtools/htslib \
+  && git clone --depth 1 --branch 1.9 https://github.com/samtools/samtools \
+  && git clone --depth 1 --branch 1.9 https://github.com/samtools/bcftools \
   && cd htslib \
   && autoconf -Wno-syntax \
   && make clean \
