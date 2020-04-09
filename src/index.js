@@ -99,10 +99,18 @@ parser.addArgument(
 );
 
 parser.addArgument(
+  ['--origSomaticVcf'],
+  {
+    help: 'Path to output original somatic vcf',
+    defaultValue: '/tmp/somatic.orig.vcf'
+  }
+);
+
+parser.addArgument(
   ['--germlineVcf'],
   {
-    help: 'Path to output germline vcf',
-    defaultValue: '/tmp/germline.vcf'
+    help: 'Path to output original germline vcf',
+    defaultValue: '/tmp/germline.orig.vcf'
   }
 );
 
