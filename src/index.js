@@ -109,8 +109,8 @@ parser.addArgument(
 parser.addArgument(
   ['--germlineVcf'],
   {
-    help: 'Path to output original germline vcf',
-    defaultValue: '/tmp/germline.orig.vcf'
+    help: 'Path to output germline vcf',
+    defaultValue: '/tmp/germline.vcf'
   }
 );
 
