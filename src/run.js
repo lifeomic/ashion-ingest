@@ -53,8 +53,13 @@ module.exports = async args => {
 
   logger.info(`Processing with somatic sample ${somaticSample} and germline ${germlineSample}`);
 
-  // pull out somatic sample with just hom / het variants
-  childProcess.execSync(`bcftools view -s ${somaticSample} -i 'GT!="0/0"' ${somaticVcf} | bgzip -f -c > ${args.somaticVcf}`);
+  // pull out somatic sample and exclude any 0/0 calls with an alternate read count of 0
+  // eslint-disable-next-line
+  childProcess.execSync(`bcftools view -s ${somaticSample} ${somaticVcf} | bcftools view --exclude 'GT="0/0" & FORMAT/AO=0' | sed 's~\t0/0:~\t0/1:~g' | bgzip -f -c > ${args.somaticVcf}`);
+  if (args.origSomaticVcf) {
+    childProcess.execSync(`cp -f ${somaticVcf} ${args.origSomaticVcf} && bgzip -f ${args.origSomaticVcf}`);
+    logger.info(`Copied ${somaticVcf} to ${args.origSomaticVcf}`);
+  }
 
   const germlineVcf = getValue(await glob(`${TAR_ROOT_DIR}/**/*.germlineFreebayes.filt.norm.RESEARCHUSEONLY.snpEff.filt.vcf`));
   if (germlineVcf) {
