@@ -3,6 +3,7 @@
 const { ArgumentParser } = require('argparse');
 const packageJson = require('../package.json');
 const run = require('./run');
+const ga4gh = require('./ga4gh');
 
 const parser = new ArgumentParser({
   version: packageJson.version,
@@ -10,7 +11,14 @@ const parser = new ArgumentParser({
   description: packageJson.description
 });
 
-parser.addArgument(
+const subparsers = parser.addSubparsers({
+  title: 'subcommands',
+  dest: 'run'
+});
+
+const ga4ghcmd = subparsers.addParser('ga4gh', {addHelp: true});
+
+ga4ghcmd.addArgument(
   ['--input'],
   {
     required: true,
@@ -18,7 +26,32 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ga4ghcmd.addArgument(
+  ['--source'],
+  {
+    help: 'Name of source file'
+  }
+);
+
+ga4ghcmd.addArgument(
+  ['--output'],
+  {
+    required: true,
+    help: 'Output path for files'
+  }
+);
+
+const ingest = subparsers.addParser('ingest', {addHelp: true});
+
+ingest.addArgument(
+  ['--input'],
+  {
+    required: true,
+    help: 'Path to gzipped TAR file'
+  }
+);
+
+ingest.addArgument(
   ['--patient'],
   {
     required: true,
@@ -26,7 +59,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--project'],
   {
     required: true,
@@ -34,7 +67,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--sequence'],
   {
     required: true,
@@ -42,7 +75,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--testId'],
   {
     required: true,
@@ -50,7 +83,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--sequence-date'],
   {
     required: true,
@@ -58,7 +91,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--fhir'],
   {
     help: 'Path to output FHIR resources',
@@ -66,7 +99,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--cnv'],
   {
     help: 'Path to output CNV CSV',
@@ -74,7 +107,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--fnv'],
   {
     help: 'Path to output FNV CSV',
@@ -82,7 +115,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--expression'],
   {
     help: 'Path to output expression RGEL',
@@ -90,7 +123,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--somaticVcf'],
   {
     help: 'Path to output somatic vcf',
@@ -98,7 +131,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--origSomaticVcf'],
   {
     help: 'Path to output original somatic vcf',
@@ -106,7 +139,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--germlineVcf'],
   {
     help: 'Path to output germline vcf',
@@ -114,7 +147,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--somaticBam'],
   {
     help: 'Path to output somatic BAM',
@@ -122,7 +155,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--germlineBam'],
   {
     help: 'Path to output germline BAM',
@@ -130,7 +163,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--rnaBam'],
   {
     help: 'Path to output rna BAM',
@@ -138,7 +171,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--reportFile'],
   {
     help: 'The report file path',
@@ -146,7 +179,7 @@ parser.addArgument(
   }
 );
 
-parser.addArgument(
+ingest.addArgument(
   ['--reportUrl'],
   {
     help: 'The report file URL'
@@ -164,4 +197,9 @@ process.on('unhandledRejection', function (reason, p) {
 });
 
 const args = parser.parseArgs();
-run(args);
+
+if (args.run === 'ingest') {
+  run(args);
+} else if (args.run === 'ga4gh') {
+  ga4gh(args);
+}

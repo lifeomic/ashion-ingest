@@ -13,11 +13,6 @@ RUN apk add --no-cache \
   bzip2-dev \
   xz-dev
 
-RUN mkdir -p /opt/app
-WORKDIR /tmp
-
-COPY target/build/ /opt/app/
-
 # -> /usr/local/bin/bgzip
 # -> /usr/local/bin/tabix
 RUN set -ex \
@@ -35,5 +30,10 @@ RUN set -ex \
   && make \
   && cp bcftools $USR_BIN \
   && rm -fr /opt/htslib /opt/samtools /opt/bcftools
+
+RUN mkdir -p /opt/app
+WORKDIR /tmp
+
+COPY target/build/ /opt/app/
 
 ENTRYPOINT ["node", "/opt/app/src/index.js"]
