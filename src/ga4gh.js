@@ -20,6 +20,7 @@ const cnv = require('./cnv');
 const fnv = require('./fnv');
 const rna = require('./rna');
 const other = require('./other2');
+const pdf = require('./pdf');
 
 const TAR_ROOT_DIR = process.cwd();
 const getValue = match => (match && match.length === 1) ? match[0] : null;
@@ -60,19 +61,39 @@ module.exports = async args => {
   }
 
   logger.info(`Processing with somatic sample ${somaticSample} and germline ${germlineSample}`);
+
   const yaml = {
     tests: [
       {
         name: 'Ashion',
         testType: 'GEM ExTra',
-        patientIdentifier: 'TODO',
-        indexedDate: 'TODO',
         reference: 'GRCh37',
         sourceFile: args.source,
         files: []
       }
     ]
   };
+
+  const pdfFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.pdf`)) || getValue(await glob(`${TAR_ROOT_DIR}/*.pdf`));
+  if (pdfFile) {
+    const patientInfo = await pdf(logger, pdfFile);
+
+    yaml.tests[0].indexedDate = patientInfo.indexedDate;
+    yaml.tests[0].bodySite = patientInfo.bodySite;
+    yaml.tests[0].bodySiteDisplay = patientInfo.bodySite;
+    yaml.tests[0].bodySiteSystem = 'http://ashion.com/bodySite';
+    yaml.tests[0].patientIdentifier = patientInfo.mrn;
+    yaml.tests[0].patientInfo = {
+      firstName: patientInfo.firstName,
+      lastName: patientInfo.lastName,
+      dob: patientInfo.dob,
+      gender: patientInfo.gender
+    };
+
+    childProcess.execSync(`cp -f '${pdfFile}' '${prefix}.pdf'`);
+    logger.info(`Copied ${pdfFile} to ${prefix}.pdf`);
+    yaml.tests[0].reportFile = `.lifeomic/ashion/${ymlPrefix}.pdf`;
+  }
 
   // pull out somatic sample and exclude any 0/0 calls with an alternate read count of 0
   // eslint-disable-next-line
@@ -175,13 +196,6 @@ module.exports = async args => {
     yaml.tests[0].msi = values.msi;
     yaml.tests[0].tmb = values.tmb;
     yaml.tests[0].tmbScore = values.tmbScore;
-  }
-
-  const pdfFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.pdf`)) || getValue(await glob(`${TAR_ROOT_DIR}/*.pdf`));
-  if (pdfFile) {
-    childProcess.execSync(`cp -f '${pdfFile}' '${prefix}.pdf'`);
-    logger.info(`Copied ${pdfFile} to ${prefix}.pdf`);
-    yaml.tests[0].reportFile = `.lifeomic/ashion/${ymlPrefix}.pdf`;
   }
 
   const parsed = YAML.stringify(yaml, 4);
