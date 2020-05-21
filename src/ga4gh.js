@@ -90,14 +90,8 @@ module.exports = async args => {
       gender: patientInfo.gender,
       identifiers: [
         {
-          type: {
-            coding: [
-              {
-                system: 'http://hl7.org/fhir/v2/0203',
-                code: 'MR'
-              }
-            ]
-          },
+          codingSystem: 'http://hl7.org/fhir/v2/0203',
+          codingCode: 'MR',
           value: patientInfo.mrn
         }
       ]
