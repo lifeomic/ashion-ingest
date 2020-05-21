@@ -87,7 +87,20 @@ module.exports = async args => {
       firstName: patientInfo.firstName,
       lastName: patientInfo.lastName,
       dob: patientInfo.dob,
-      gender: patientInfo.gender
+      gender: patientInfo.gender,
+      identifiers: [
+        {
+          type: {
+            coding: [
+              {
+                system: 'http://hl7.org/fhir/v2/0203',
+                code: 'MR'
+              }
+            ]
+          },
+          value: patientInfo.mrn
+        }
+      ]
     };
 
     childProcess.execSync(`cp -f '${pdfFile}' '${prefix}.pdf'`);
