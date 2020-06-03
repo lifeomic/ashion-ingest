@@ -40,9 +40,9 @@ module.exports = async args => {
   });
 
   const rootFileName = path.basename(args.input).split('.')[0];
-  await mkdirp(`${args.output}/${rootFileName}`);
-  const prefix = `${args.output}/${rootFileName}/${rootFileName}`;
-  const ymlPrefix = `${rootFileName}/${rootFileName}`;
+  await mkdirp(`${args.output}/.lifeomic/ashion/${rootFileName}`);
+  const prefix = `${args.output}/.lifeomic/ashion/${rootFileName}/${rootFileName}`;
+  const ymlPrefix = `.lifeomic/ashion/${rootFileName}/${rootFileName}`;
 
   logger.info(`Tar extraction completed`);
 
@@ -87,7 +87,7 @@ module.exports = async args => {
       firstName: patientInfo.firstName,
       lastName: patientInfo.lastName,
       dob: patientInfo.dob,
-      gender: patientInfo.gender,
+      gender: patientInfo.gender.toLowerCase(),
       identifiers: [
         {
           codingSystem: 'http://hl7.org/fhir/v2/0203',
@@ -111,7 +111,9 @@ module.exports = async args => {
   yaml.tests[0].files.push({
     type: 'shortVariant',
     sequenceType: 'somatic',
-    fileName: `.lifeomic/ashion/${ymlPrefix}.somatic.vcf.gz`
+    fileName: `${ymlPrefix}.somatic.vcf.gz`,
+    normalize: true,
+    passFilter: true
   });
 
   const germlineVcf = getValue(await glob(`${TAR_ROOT_DIR}/**/*.germlineFreebayes.filt.norm.RESEARCHUSEONLY.snpEff.filt.vcf`));
@@ -122,7 +124,9 @@ module.exports = async args => {
     yaml.tests[0].files.push({
       type: 'shortVariant',
       sequenceType: 'germline',
-      fileName: `.lifeomic/ashion/${ymlPrefix}.germline.vcf.gz`
+      fileName: `${ymlPrefix}.germline.vcf.gz`,
+      normalize: true,
+      passFilter: true
     });
   }
 
@@ -133,7 +137,7 @@ module.exports = async args => {
     yaml.tests[0].files.push({
       type: 'read',
       sequenceType: 'germline',
-      fileName: `.lifeomic/ashion/${ymlPrefix}.germline.bam`
+      fileName: `${ymlPrefix}.germline.bam`
     });
   }
 
@@ -144,7 +148,7 @@ module.exports = async args => {
     yaml.tests[0].files.push({
       type: 'read',
       sequenceType: 'somatic',
-      fileName: `.lifeomic/ashion/${ymlPrefix}.somatic.bam`
+      fileName: `${ymlPrefix}.somatic.bam`
     });
   }
 
@@ -155,7 +159,7 @@ module.exports = async args => {
     yaml.tests[0].files.push({
       type: 'read',
       sequenceType: 'somatic',
-      fileName: `.lifeomic/ashion/${ymlPrefix}.rna.bam`
+      fileName: `${ymlPrefix}.rna.bam`
     });
   }
 
@@ -167,7 +171,7 @@ module.exports = async args => {
     yaml.tests[0].files.push({
       type: 'copyNumberVariant',
       sequenceType: 'somatic',
-      fileName: `.lifeomic/ashion/${ymlPrefix}.copynumber.csv`
+      fileName: `${ymlPrefix}.copynumber.csv`
     });
   }
 
@@ -179,7 +183,7 @@ module.exports = async args => {
     yaml.tests[0].files.push({
       type: 'expression',
       sequenceType: 'somatic',
-      fileName: `.lifeomic/ashion/${ymlPrefix}.expression.rgel`
+      fileName: `${ymlPrefix}.expression.rgel`
     });
   }
 
@@ -192,7 +196,7 @@ module.exports = async args => {
     yaml.tests[0].files.push({
       type: 'structuralVariant',
       sequenceType: 'somatic',
-      fileName: `.lifeomic/ashion/${ymlPrefix}.structural.csv`
+      fileName: `${ymlPrefix}.structural.csv`
     });
   }
 
