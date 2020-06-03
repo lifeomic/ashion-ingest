@@ -99,7 +99,7 @@ module.exports = async args => {
 
     childProcess.execSync(`cp -f '${pdfFile}' '${prefix}.pdf'`);
     logger.info(`Copied ${pdfFile} to ${prefix}.pdf`);
-    yaml.tests[0].reportFile = `.lifeomic/ashion/${ymlPrefix}.pdf`;
+    yaml.tests[0].reportFile = `${ymlPrefix}.pdf`;
   }
 
   // pull out somatic sample and exclude any 0/0 calls with an alternate read count of 0
