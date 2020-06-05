@@ -76,7 +76,7 @@ module.exports = async args => {
 
   const pdfFile = getValue(await glob(`${TAR_ROOT_DIR}/**/*.pdf`)) || getValue(await glob(`${TAR_ROOT_DIR}/*.pdf`));
   if (pdfFile) {
-    const patientInfo = await pdf(logger, pdfFile);
+    const {diagnosis, patientInfo} = await pdf(logger, pdfFile);
 
     yaml.tests[0].indexedDate = patientInfo.indexedDate;
     yaml.tests[0].bodySite = patientInfo.bodySite;
@@ -96,6 +96,12 @@ module.exports = async args => {
         }
       ]
     };
+
+    if (diagnosis) {
+      yaml.test[0].diagnosis = diagnosis;
+      yaml.test[0].diagnosisDisplay = diagnosis;
+      yaml.test[0].diagnosisSystem = 'http://ashion.com/diagnosis';
+    }
 
     childProcess.execSync(`cp -f '${pdfFile}' '${prefix}.pdf'`);
     logger.info(`Copied ${pdfFile} to ${prefix}.pdf`);
