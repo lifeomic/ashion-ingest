@@ -4,9 +4,15 @@ const pdf = require('pdf-parse');
 module.exports = async (logger, input) => {
   const buffer = fs.readFileSync(input);
   const patientInfo = {};
+  let diagnosis = null;
   const data = await pdf(buffer, { max: 1 });
 
   for (const line of data.text.split('\n')) {
+    const diagnosisLine = line.match(/^Diagnosis:(.*)/);
+    if (diagnosisLine) {
+      diagnosis = diagnosisLine[1].trim();
+    }
+
     const reportLine = line.match(/^Report\s*Date:(.*)/);
     if (reportLine) {
       patientInfo.indexedDate = reportLine[1].trim();
@@ -35,5 +41,5 @@ module.exports = async (logger, input) => {
 
   logger.info({input}, 'Process patient in from pdf report file');
 
-  return patientInfo;
+  return { diagnosis, patientInfo };
 };
