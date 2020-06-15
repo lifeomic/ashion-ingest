@@ -41,6 +41,13 @@ ga4ghcmd.addArgument(
   }
 );
 
+ga4ghcmd.addArgument(
+  ['--includePatientInfo'],
+  {
+    help: 'If present, the patient info will be added to the manifest file'
+  }
+);
+
 const ingest = subparsers.addParser('ingest', {addHelp: true});
 
 ingest.addArgument(
