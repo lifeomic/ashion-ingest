@@ -83,24 +83,27 @@ module.exports = async args => {
     yaml.tests[0].bodySiteDisplay = patientInfo.bodySite;
     yaml.tests[0].bodySiteSystem = 'http://ashion.com/bodySite';
     yaml.tests[0].patientIdentifier = patientInfo.mrn;
-    yaml.tests[0].patientInfo = {
-      firstName: patientInfo.firstName,
-      lastName: patientInfo.lastName,
-      dob: patientInfo.dob,
-      gender: patientInfo.gender.toLowerCase(),
-      identifiers: [
-        {
-          codingSystem: 'http://hl7.org/fhir/v2/0203',
-          codingCode: 'MR',
-          value: patientInfo.mrn
-        }
-      ]
-    };
+
+    if (args.includePatientInfo) {
+      yaml.tests[0].patientInfo = {
+        firstName: patientInfo.firstName,
+        lastName: patientInfo.lastName,
+        dob: patientInfo.dob,
+        gender: patientInfo.gender.toLowerCase(),
+        identifiers: [
+          {
+            codingSystem: 'http://hl7.org/fhir/v2/0203',
+            codingCode: 'MR',
+            value: patientInfo.mrn
+          }
+        ]
+      };
+    }
 
     if (diagnosis) {
-      yaml.test[0].diagnosis = diagnosis;
-      yaml.test[0].diagnosisDisplay = diagnosis;
-      yaml.test[0].diagnosisSystem = 'http://ashion.com/diagnosis';
+      yaml.tests[0].diagnosis = diagnosis;
+      yaml.tests[0].diagnosisDisplay = diagnosis;
+      yaml.tests[0].diagnosisSystem = 'http://ashion.com/diagnosis';
     }
 
     childProcess.execSync(`cp -f '${pdfFile}' '${prefix}.pdf'`);
