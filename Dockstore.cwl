@@ -82,7 +82,7 @@ steps:
       class: CommandLineTool
       hints:
         DockerRequirement:
-          dockerPull: lifeomic/ashion-ingest:3.0.1
+          dockerPull: lifeomic/ashion-ingest:3.1.0
       baseCommand: ga4gh
       arguments: ["--output", "/tmp"]
       inputs:
