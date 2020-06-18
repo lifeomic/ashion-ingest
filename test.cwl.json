@@ -1,0 +1,5 @@
+ 
+{
+  "source": "input_file.tar.gz",
+  "LIFEOMIC_GENOME_REFERENCE": "GRCh37"
+}
