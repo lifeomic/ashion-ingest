@@ -40,8 +40,8 @@ module.exports = async args => {
   });
 
   const rootFileName = path.basename(args.input).split('.')[0];
-  await mkdirp(`${args.output}/.lifeomic/ashion/${rootFileName}`);
-  const prefix = `${args.output}/.lifeomic/ashion/${rootFileName}/${rootFileName}`;
+  await mkdirp(`${args.output}/${rootFileName}`);
+  const prefix = `${args.output}/${rootFileName}/${rootFileName}`;
   const ymlPrefix = `.lifeomic/ashion/${rootFileName}/${rootFileName}`;
 
   logger.info(`Tar extraction completed`);
@@ -120,8 +120,7 @@ module.exports = async args => {
   yaml.tests[0].files.push({
     type: 'shortVariant',
     sequenceType: 'somatic',
-    fileName: `${ymlPrefix}.somatic.vcf.gz`,
-    normalize: true,
+    fileName: `${ymlPrefix}.somatic.nrm.vcf.gz`,
     passFilter: true
   });
 
@@ -133,8 +132,7 @@ module.exports = async args => {
     yaml.tests[0].files.push({
       type: 'shortVariant',
       sequenceType: 'germline',
-      fileName: `${ymlPrefix}.germline.vcf.gz`,
-      normalize: true,
+      fileName: `${ymlPrefix}.germline.nrm.vcf.gz`,      
       passFilter: true
     });
   }
@@ -219,5 +217,5 @@ module.exports = async args => {
   }
 
   const parsed = YAML.stringify(yaml, 4);
-  fs.writeFileSync(`${prefix}.ga4gh.yml`, parsed);
+  fs.writeFileSync(`${prefix}.ga4gh.tmp`, parsed);
 };
