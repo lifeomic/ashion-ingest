@@ -15,6 +15,7 @@ jobs:
         node-version: 12
     - name: Build and Test
       run: |
+        yarn
         yarn test
         yarn build
     - name: Build Docker
