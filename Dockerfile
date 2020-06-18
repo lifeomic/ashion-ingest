@@ -11,7 +11,8 @@ RUN apk add --no-cache \
   g++ \
   zlib-dev \
   bzip2-dev \
-  xz-dev
+  xz-dev \
+  ncurses-dev
 
 # -> /usr/local/bin/bgzip
 # -> /usr/local/bin/tabix
@@ -29,6 +30,10 @@ RUN set -ex \
   && autoconf -Wno-syntax \
   && make \
   && cp bcftools $USR_BIN \
+  && cd /opt/samtools \
+  && autoconf -Wno-syntax \
+  && make \
+  && cp samtools $USR_BIN \
   && rm -fr /opt/htslib /opt/samtools /opt/bcftools
 
 RUN mkdir -p /opt/app

@@ -77,12 +77,12 @@ steps:
       tarFile: tarFile
       source: source
     out:
-      [copynumber, expression, tmp, germline_bam, germline_vcf, pdf, rna_bam, somatic_bam, somatic_vcf, structural]
+      [copynumber, expression, tmp, germline_bam, germline_bam_index, germline_bam_header, germline_vcf, pdf, rna_bam, rna_bam_index, rna_bam_header, somatic_bam, somatic_bam_index, somatic_bam_header, somatic_vcf, structural]
     run:
       class: CommandLineTool
       hints:
         DockerRequirement:
-          dockerPull: lifeomic/ashion-ingest:3.1.0
+          dockerPull: lifeomic/ashion-ingest:3.1.1
       baseCommand: ga4gh
       arguments: ["--output", "/tmp"]
       inputs:
