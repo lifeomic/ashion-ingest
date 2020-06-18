@@ -2,10 +2,11 @@ cwlVersion: v1.0
 class: Workflow
 hints:
   ResourceRequirement:
-    coresMin: 1
-    coresMax: 1
-    ramMin: 3GB
-    ramMax: 3GB
+    coresMin: 6
+    coresMax: 6
+    ramMin: 4GB
+    ramMax: 4GB
+    tmpdirMin: 3000
 inputs:
   tarFile: File
   source: string
@@ -24,6 +25,12 @@ outputs:
   germline_bam:
     type: File
     outputSource: process_ashion/germline_bam
+  germline_bam_index:
+    type: File
+    outputSource: process_ashion/germline_bam_index
+  germline_bam_header:
+    type: File
+    outputSource: process_ashion/germline_bam_header
   germline_vcf:
     type: File
     outputSource: process_ashion/germline_vcf
@@ -33,9 +40,21 @@ outputs:
   rna_bam:
     type: File
     outputSource: process_ashion/rna_bam
+  rna_bam_index:
+    type: File
+    outputSource: process_ashion/rna_bam_index
+  rna_bam_header:
+    type: File
+    outputSource: process_ashion/rna_bam_header
   somatic_bam:
     type: File
     outputSource: process_ashion/somatic_bam
+  somatic_bam_index:
+    type: File
+    outputSource: process_ashion/somatic_bam_index
+  somatic_bam_header:
+    type: File
+    outputSource: process_ashion/somatic_bam_header
   somatic_vcf:
     type: File
     outputSource: process_ashion/somatic_vcf
@@ -58,12 +77,12 @@ steps:
       tarFile: tarFile
       source: source
     out:
-      [copynumber, expression, tmp, germline_bam, germline_vcf, pdf, rna_bam, somatic_bam, somatic_vcf, structural]
+      [copynumber, expression, tmp, germline_bam, germline_bam_index, germline_bam_header, germline_vcf, pdf, rna_bam, rna_bam_index, rna_bam_header, somatic_bam, somatic_bam_index, somatic_bam_header, somatic_vcf, structural]
     run:
       class: CommandLineTool
       hints:
         DockerRequirement:
-          dockerPull: lifeomic/ashion-ingest:3.0.1
+          dockerPull: lifeomic/ashion-ingest:3.1.1
       baseCommand: ga4gh
       arguments: ["--output", "/tmp"]
       inputs:
@@ -94,6 +113,14 @@ steps:
           type: File
           outputBinding:
             glob: '/tmp/**/*.germline.bam'
+        germline_bam_index:
+          type: File
+          outputBinding:
+            glob: '/tmp/**/*.germline.bam.bai'
+        germline_bam_header:
+          type: File
+          outputBinding:
+            glob: '/tmp/**/*.germline.bam.header.bam'
         germline_vcf:
           type: File
           outputBinding:
@@ -106,10 +133,26 @@ steps:
           type: File
           outputBinding:
             glob: '/tmp/**/*.rna.bam'
+        rna_bam_index:
+          type: File
+          outputBinding:
+            glob: '/tmp/**/*.rna.bam.bai'
+        rna_bam_header:
+          type: File
+          outputBinding:
+            glob: '/tmp/**/*.rna.bam.header.bam'
         somatic_bam:
           type: File
           outputBinding:
             glob: '/tmp/**/*.somatic.bam'
+        somatic_bam_index:
+          type: File
+          outputBinding:
+            glob: '/tmp/**/*.somatic.bam.bai'
+        somatic_bam_header:
+          type: File
+          outputBinding:
+            glob: '/tmp/**/*.somatic.bam.header.bam'
         somatic_vcf:
           type: File
           outputBinding:

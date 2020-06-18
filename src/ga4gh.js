@@ -132,7 +132,7 @@ module.exports = async args => {
     yaml.tests[0].files.push({
       type: 'shortVariant',
       sequenceType: 'germline',
-      fileName: `${ymlPrefix}.germline.nrm.vcf.gz`,      
+      fileName: `${ymlPrefix}.germline.nrm.vcf.gz`,
       passFilter: true
     });
   }
@@ -140,33 +140,42 @@ module.exports = async args => {
   const germlineBam = getValue(await glob(`${TAR_ROOT_DIR}/**/*C1*.aligned.bam`));
   if (germlineBam) {
     childProcess.execSync(`cp -f ${germlineBam} ${prefix}.germline.bam`);
+    childProcess.execSync(`samtools index -@ 8 ${prefix}.germline.bam`);
+    childProcess.execSync(`samtools view -H -o ${prefix}.germline.bam.header.bam ${prefix}.germline.bam`);
     logger.info(`Copied ${germlineBam} to ${prefix}.germline.bam`);
     yaml.tests[0].files.push({
       type: 'read',
       sequenceType: 'germline',
-      fileName: `${ymlPrefix}.germline.bam`
+      fileName: `${ymlPrefix}.germline.bam`,
+      normalize: false
     });
   }
 
   const somaticBam = getValue(await glob(`${TAR_ROOT_DIR}/**/*T1*.aligned.bam`));
   if (somaticBam) {
     childProcess.execSync(`cp -f ${somaticBam} ${prefix}.somatic.bam`);
+    childProcess.execSync(`samtools index -@ 8 ${prefix}.somatic.bam`);
+    childProcess.execSync(`samtools view -H -o ${prefix}.somatic.bam.header.bam ${prefix}.somatic.bam`);
     logger.info(`Copied ${somaticBam} to ${prefix}.somatic.bam`);
     yaml.tests[0].files.push({
       type: 'read',
       sequenceType: 'somatic',
-      fileName: `${ymlPrefix}.somatic.bam`
+      fileName: `${ymlPrefix}.somatic.bam`,
+      normalize: false
     });
   }
 
   const rnaBam = getValue(await glob(`${TAR_ROOT_DIR}/**/*.std.STAR.bam`));
   if (rnaBam) {
     childProcess.execSync(`cp -f ${rnaBam} ${prefix}.rna.bam`);
+    childProcess.execSync(`samtools index -@ 8 ${prefix}.rna.bam`);
+    childProcess.execSync(`samtools view -H -o ${prefix}.rna.bam.header.bam ${prefix}.rna.bam`);
     logger.info(`Copied ${rnaBam} to ${prefix}.rna.bam`);
     yaml.tests[0].files.push({
       type: 'read',
       sequenceType: 'somatic',
-      fileName: `${ymlPrefix}.rna.bam`
+      fileName: `${ymlPrefix}.rna.bam`,
+      normalize: false
     });
   }
 
