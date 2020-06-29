@@ -4,7 +4,7 @@ id: ashion-ingest
 label: ashion-ingest
 hints:
   DockerRequirement:
-    dockerPull: lifeomic/ashion-ingest:3.1.1
+    dockerPull: lifeomic/ashion-ingest:3.2.0
 baseCommand: ga4gh
 arguments: ["--output", "/tmp"]
 
@@ -27,7 +27,7 @@ outputs:
   expression:
     type: File
     outputBinding:
-      glob: '/tmp/**/*.expression.rgel'
+      glob: '/tmp/**/*.expression.rgel.gz'
   tmp:
     type: File
     outputBinding:
