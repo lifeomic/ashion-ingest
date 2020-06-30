@@ -195,11 +195,12 @@ module.exports = async args => {
   logger.info(expressionFile);
   if (expressionFile) {
     await rna(somaticSample, expressionFile, `${prefix}.expression.rgel`);
+    childProcess.execSync(`bgzip ${prefix}.expression.rgel`);
     logger.info(`Processed expression ${expressionFile}`);
     yaml.tests[0].files.push({
       type: 'expression',
       sequenceType: 'somatic',
-      fileName: `${ymlPrefix}.expression.rgel`
+      fileName: `${ymlPrefix}.expression.rgel.gz`
     });
   }
 

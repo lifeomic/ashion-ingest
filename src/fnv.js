@@ -56,6 +56,10 @@ module.exports = async (logger, sampleId, fnvFile, transcriptInput, fusionInput,
       stream.write(`${sampleId},${formatGene(gene1)},${formatGene(gene2)},rna_fusion,${left_chr},${left_pos},${left_pos},${right_chr},${right_pos},${right_pos},N/A,somatic,N/A,"${JSON.stringify(attributes).replace(/"/g, '\'')}"\n`);
     });
   }
-
   stream.close();
+
+  return new Promise((resolve, reject) => {
+    stream.on('error', reject);
+    stream.on('finish', resolve);
+  });
 };
