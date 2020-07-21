@@ -23,11 +23,22 @@ module.exports = async (logger, input) => {
       patientInfo.firstName = first.trim();
       patientInfo.lastName = last.trim();
     }
-    const dobLine = line.match(/DOB:(.*)Specimen\s*Site:(.*)/);
-    if (dobLine) {
-      patientInfo.dob = dobLine[1].trim();
-      patientInfo.bodySite = dobLine[2].trim().replace(/([a-zA-Z])(?=[A-Z])/g, '$1 ');
+    const dobSpecLine = line.match(/DOB:(.*)Specimen\s*Site:(.*)/);
+    if (dobSpecLine) {
+      patientInfo.dob = dobSpecLine[1].trim();
+      patientInfo.bodySite = dobSpecLine[2].trim().replace(/([a-zA-Z])(?=[A-Z])/g, '$1 ');
     }
+
+    const dobLine = line.match(/DOB:(.*)/);
+    if (dobLine && !patientInfo.dob) {
+      patientInfo.dob = dobLine[1].trim();
+    }
+
+    const specLine = line.match(/Specimen\s*Site:(.*)/);
+    if (specLine && !patientInfo.bodySite) {
+      patientInfo.bodySite = specLine[1].trim().replace(/([a-zA-Z])(?=[A-Z])/g, '$1 ');
+    }
+
     const mrnLine = line.match(/Medical\s*Record\s*#:(.*)Tumor\s*Collection\s*Date:(.*)/) ||
           line.match(/Medical\s*Record\s*#:(.*)/);
     if (mrnLine) {
