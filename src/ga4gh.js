@@ -83,6 +83,8 @@ module.exports = async args => {
     yaml.tests[0].bodySiteDisplay = patientInfo.bodySite;
     yaml.tests[0].bodySiteSystem = 'http://ashion.com/bodySite';
     yaml.tests[0].patientIdentifier = patientInfo.mrn;
+    yaml.tests[0].patientDOB = patientInfo.dob;
+    yaml.tests[0].patientLastName = patientInfo.lastName;
 
     if (args.includePatientInfo) {
       yaml.tests[0].patientInfo = {
