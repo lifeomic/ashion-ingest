@@ -1,0 +1,13 @@
+tests:
+    -
+        name: 'Ashion'
+        testType: Ashion
+        reference: GRCh37
+        patientId: 86dac4d7-1bb7-4e21-8137-a75ecd1c8845
+        indexedDate: '2020-11-06T21:53:26.804Z'
+        files:
+            - {type: shortVariant, sequenceType: somatic, fileName: .lifeomic/hudson-alpha/86dac4d7-1bb7-4e21-8137-a75ecd1c8845/A000555_SL888888_hudson_alpha_orien.lifted.somatic.nrm.vcf.gz}
+            - {type: shortVariant, sequenceType: germline, fileName: .lifeomic/hudson-alpha/86dac4d7-1bb7-4e21-8137-a75ecd1c8845/A000555_SL888888_hudson_alpha_orien.lifted.germline.nrm.vcf.gz}
+            - {type: expression, sequenceType: somatic, fileName: .lifeomic/hudson-alpha/86dac4d7-1bb7-4e21-8137-a75ecd1c8845/A000555_SL888888_hudson_alpha_orien.rgel}
+            - {type: structuralVariant, sequenceType: somatic, fileName: .lifeomic/hudson-alpha/86dac4d7-1bb7-4e21-8137-a75ecd1c8845/A000555_SL888888_hudson_alpha_orien.structural.csv}
+        msi: indeterminate
