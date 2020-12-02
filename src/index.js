@@ -4,6 +4,7 @@ const { ArgumentParser } = require('argparse');
 const packageJson = require('../package.json');
 const run = require('./run');
 const ga4gh = require('./ga4gh');
+const yml = require('./yml');
 
 const parser = new ArgumentParser({
   version: packageJson.version,
@@ -193,6 +194,32 @@ ingest.addArgument(
   }
 );
 
+const ymlParser = subparsers.addParser('yml', {addHelp: true});
+
+ymlParser.addArgument(
+  ['--input'],
+  {
+    required: true,
+    help: 'Path to ga4gh tmp file'
+  }
+);
+
+ymlParser.addArgument(
+  ['--pcann'],
+  {
+    required: true,
+    help: 'Path to PCANN json file'
+  }
+);
+
+ymlParser.addArgument(
+  ['--cancerscope'],
+  {
+    required: true,
+    help: 'Path to CancerScope json file'
+  }
+);
+
 process.on('uncaughtException', function (err) {
   console.error('Uncaught exception ', (err.stack || err.toString()));
   process.exit(1);
@@ -207,6 +234,8 @@ const args = parser.parseArgs();
 
 if (args.run === 'ingest') {
   run(args);
+} else if (args.run === 'yml') {
+  yml(args.input, args.pcann, args.cancerscope);
 } else if (args.run === 'ga4gh') {
   ga4gh(args);
 }

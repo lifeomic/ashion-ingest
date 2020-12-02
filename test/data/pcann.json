@@ -1,0 +1,38 @@
+{
+  "Report": {},
+  "Result": [
+      {
+          "Sample": "SL888888_st_t",
+          "SampleLabel": "N/A",
+          "PredictLabel": "[UCEC] uterine corpus endometrioid carcinoma",
+          "PredictConfidence": "0.60",
+          "Neighbors": [
+              {
+                  "PCAlabel": "[UCEC] uterine corpus endometrioid carcinoma",
+                  "PCAsample": "TCGA-AX-A3FS-01",
+                  "PCAdistance": 56.67290205053685
+              },
+              {
+                  "PCAlabel": "[BRCA] breast invasive carcinoma",
+                  "PCAsample": "TCGA-HN-A2NL-01",
+                  "PCAdistance": 58.802572838789736
+              },
+              {
+                  "PCAlabel": "[UCEC] uterine corpus endometrioid carcinoma",
+                  "PCAsample": "TCGA-E6-A2P8-01",
+                  "PCAdistance": 59.59628225764973
+              },
+              {
+                  "PCAlabel": "[BLCA] bladder urothelial carcinoma",
+                  "PCAsample": "TCGA-YC-A9TC-01",
+                  "PCAdistance": 60.076819107574096
+              },
+              {
+                  "PCAlabel": "[UCEC] uterine corpus endometrioid carcinoma",
+                  "PCAsample": "TCGA-EO-A22X-01",
+                  "PCAdistance": 60.309564422939275
+              }
+          ]
+      }
+  ]
+}

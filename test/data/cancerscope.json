@@ -1,0 +1,21 @@
+{
+  "sample": "SL888888_st_t",
+  "predictions": [
+      {
+          "label": "BLCA_TS",
+          "pred": 0.017444488,
+          "freq": 1,
+          "models": "v1_rm500dropout",
+          "rank_pred": 1,
+          "cancerscope_label": "[BLCA] Bladder Urothelial Carcinoma"
+      },
+      {
+          "label": "LUAD_TS",
+          "pred": 0.015384787,
+          "freq": 1,
+          "models": "v1_rm500",
+          "rank_pred": 2,
+          "cancerscope_label": "[LUAD] Lung adenocarcinoma"
+      }
+  ]
+}
