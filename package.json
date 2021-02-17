@@ -1,6 +1,6 @@
 {
   "name": "ashion-ingest",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "main": "src/index.js",
   "repository": "git@bitbucket.org:lifeomic/ashion-ingest.git",
   "author": "LifeOmic <development@lifeomic.com>",
@@ -21,7 +21,7 @@
     "glob": "^7.1.4",
     "line-reader": "^0.4.0",
     "mkdirp": "^0.5.1",
-    "pdf-parse": "^1.1.1",
+    "pdf2json": "^1.2.0",
     "tar": "^4.4.10",
     "yamljs": "^0.3.0"
   },
