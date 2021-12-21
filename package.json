@@ -1,6 +1,6 @@
 {
   "name": "ashion-ingest",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "main": "src/index.js",
   "repository": "git@bitbucket.org:lifeomic/ashion-ingest.git",
   "author": "LifeOmic <development@lifeomic.com>",
