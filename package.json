@@ -22,7 +22,7 @@
     "line-reader": "^0.4.0",
     "mkdirp": "^0.5.1",
     "pdf2json": "^1.2.0",
-    "tar": "^6.2.1",
+    "tar": "^7.5.3",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
